@@ -19,7 +19,7 @@ namespace WebAPI.Controllers
         [HttpGet("getall")]
         public IActionResult Get()
         {
-            Thread.Sleep(5000);
+            //Thread.Sleep(5000);
 
             var result = _carService.GetAll();
             if(result.Success)
@@ -40,9 +40,9 @@ namespace WebAPI.Controllers
         }
         
         [HttpGet("getcarsbycolorid")]
-        public IActionResult GetByColorId(int id)
+        public IActionResult GetByColorId(int colorId)
         {
-            var result = _carService.GetCarsByColorId(id);
+            var result = _carService.GetCarsByColorId(colorId);
             if (result.Success)
             {
                 return Ok(result);
