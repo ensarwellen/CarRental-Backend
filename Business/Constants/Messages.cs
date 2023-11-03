@@ -11,6 +11,7 @@ namespace Business.Constants
         public static string CarsListed = "Arabalar listelendi";
         public static string MaintenanceTime = "Sistem bakımda";
         public static string Added = "Eklendi";
+        public static string Updated = "Güncellendi";
         public static string Listed = "Listelendi";
         internal static string? AuthorizationDenied = "Yetkiniz yok";
         internal static string UserRegistered = "Kayıt olundu";
@@ -19,5 +20,6 @@ namespace Business.Constants
         internal static string SuccessfulLogin = "Giriş başarılı";
         internal static string UserAlreadyExists = "Kullanıcı zaten var";
         internal static string AccessTokenCreated = "Erişim token'i oluşturuldu";
+        internal static string ImageAdded = "Görsel Eklendi";
     }
 }

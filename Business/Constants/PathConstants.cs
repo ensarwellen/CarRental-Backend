@@ -8,6 +8,8 @@ namespace Business.Constants
 {
     public class PathConstants
     {
+        //public static readonly string RootPath = @"wwwroot\";
+        //public static readonly string ImagesPath = @"images\";
         public static string ImagesPath = "wwwroot\\Uploads\\Images\\";
     }
 }
