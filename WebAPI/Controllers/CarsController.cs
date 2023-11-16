@@ -40,9 +40,9 @@ namespace WebAPI.Controllers
         }
         
         [HttpGet("getcarsbycolorid")]
-        public IActionResult GetByColorId(int colorId)
+        public IActionResult GetByColorId(int colorId,int page)
         {
-            var result = _carService.GetCarsByColorId(colorId);
+            var result = _carService.GetCarsByColorId(colorId, page);
             if (result.Success)
             {
                 return Ok(result);
@@ -53,6 +53,17 @@ namespace WebAPI.Controllers
         public IActionResult GetCarDetail()
         {
             var result = _carService.GetCarDetail();
+            if (result.Success)
+            {
+                return Ok(result);
+            }
+            return BadRequest(result);
+        }
+
+        [HttpGet("getcarswithpagination")]
+        public IActionResult GetCarsWithPagination(int page)
+        {
+            var result = _carService.GetCarsWithPagination(page);
             if (result.Success)
             {
                 return Ok(result);
@@ -101,9 +112,9 @@ namespace WebAPI.Controllers
             return BadRequest(result);
         }
         [HttpGet("getcarsbybrandid")]
-        public IActionResult GetByBrandId(int brandId)
+        public IActionResult GetByBrandId(int brandId, int page)
         {
-            var result = _carService.GetCarsByBrandId(brandId);
+            var result = _carService.GetCarsByBrandId(brandId, page);
             if (result.Success)
             {
                 return Ok(result);

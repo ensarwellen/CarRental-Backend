@@ -74,5 +74,20 @@ namespace DataAccess.Concrete.InMemory
         {
             throw new NotImplementedException();
         }
+
+        public List<CarDetail> getCarsWithPagination(int page)
+        {
+            throw new NotImplementedException();
+        }
+
+        public List<CarDetail> GetCarDetailsByBrand(int brandId, int page)
+        {
+            throw new NotImplementedException();
+        }
+
+        public List<CarDetail> GetCarDetailsByColor(int colorId, int page)
+        {
+            throw new NotImplementedException();
+        }
     }
 }

@@ -14,6 +14,7 @@ namespace Entities.DTOs
         public string BrandName { get; set; }
         public int ColorId { get; set; }
         public int BrandId { get; set; }
+        public double PageCount { get; set; }
         public string ColorName { get; set; }
         public decimal DailyPrice { get; set; }
         public string Description { get; set; }

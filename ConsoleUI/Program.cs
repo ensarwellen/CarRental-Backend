@@ -11,7 +11,7 @@ namespace ConsoleUI
             CarManager carManager = new CarManager(new EfCarDal());
             CustomerManager customerManager = new CustomerManager(new  EfCustomerDal());
             RentalManager rentalManager = new RentalManager(new EfRentalDal());
-            rentalManager.Add(new Entities.Concrete.Rental { RentalId = 1, CardId = 1, CustomerId = 5, RentDate = new DateTime(2023, 09, 27), ReturnDate = new DateTime(2023, 09, 29) });
+            rentalManager.Add(new Entities.Concrete.Rental { Id = 1, CarId = 1, UserId = 5, RentDate = new DateTime(2023, 09, 27), ReturnDate = new DateTime(2023, 09, 29) });
             //customerManager.Add(new Entities.Concrete.Customer { Id=1,UserId = 1, CompanyName = "Toska" });
             var musteriGetir = customerManager.GetAll();
             if (musteriGetir.Success)

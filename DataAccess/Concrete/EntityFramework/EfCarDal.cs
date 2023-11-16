@@ -37,11 +37,11 @@ namespace DataAccess.Concrete.EntityFramework
                 return result.ToList();
             }
         }
-        public List<CarDetail> GetCarDetailsByBrand(int brandId)
+        public List<CarDetail> GetCarDetailsByBrand(int brandId, int page)
         {
             using (ReCapContext context = new ReCapContext())
             {
-                var result = from car in context.Cars
+                var result = (from car in context.Cars
                              join brand in context.Brands on car.BrandId equals brand.Id
                              join color in context.Colors on car.ColorId equals color.Id
                              where car.BrandId == brandId
@@ -59,15 +59,23 @@ namespace DataAccess.Concrete.EntityFramework
                                  ImagePath = (from img in context.CarImages
                                               where img.CarId == car.Id
                                               select img.ImagePath).FirstOrDefault()
-                             };
-                return result.ToList();
+                             }).ToList();
+                var pageResults = 3f;
+                var totalNumberOfCars = result.Count();
+                var pageCount = Math.Ceiling(totalNumberOfCars / pageResults);
+                foreach (var carDetail in result)
+                {
+                    carDetail.PageCount = (int)pageCount;
+                }
+                var cars = result.Skip((page - 1) * (int)pageResults).Take((int)pageResults).ToList();
+                return cars;
             }
         }
-        public List<CarDetail> GetCarDetailsByColor(int colorId)
+        public List<CarDetail> GetCarDetailsByColor(int colorId,int page)
         {
             using (ReCapContext context = new ReCapContext())
             {
-                var result = from car in context.Cars
+                var result = (from car in context.Cars
                              join brand in context.Brands on car.BrandId equals brand.Id
                              join color in context.Colors on car.ColorId equals color.Id
                              where car.ColorId == colorId
@@ -86,8 +94,16 @@ namespace DataAccess.Concrete.EntityFramework
                                               where img.CarId == car.Id
                                               select img.ImagePath).FirstOrDefault()
 
-                             };
-                return result.ToList();
+                             }).ToList();
+                var pageResults = 3f;
+                var totalNumberOfCars = result.Count();
+                var pageCount = Math.Ceiling(totalNumberOfCars / pageResults);
+                foreach (var carDetail in result)
+                {
+                    carDetail.PageCount = (int)pageCount;
+                }
+                var cars = result.Skip((page - 1) * (int)pageResults).Take((int)pageResults).ToList();
+                return cars;
             }
         }
         public CarDetail GetCarById(int carId)
@@ -117,6 +133,39 @@ namespace DataAccess.Concrete.EntityFramework
                              };
                 return result.FirstOrDefault();
             }
+        }
+        public List<CarDetail> getCarsWithPagination(int page)
+        {
+            using(ReCapContext context = new ReCapContext())
+            {
+                var pageResults = 3f;
+                var totalNumberOfCars = context.Cars.Count();
+                var pageCount = Math.Ceiling(totalNumberOfCars / pageResults);
+                var cars = context.Cars.Skip((page-1)*(int)pageResults).Take((int)pageResults).ToList();
+
+                var result=from c in cars
+                           join b in context.Brands
+                             on c.BrandId equals b.Id
+                           join col in context.Colors
+                           on c.ColorId equals col.Id
+                           select new CarDetail
+                           {
+                               BrandName = b.Name,
+                               CarName = b.Name,
+                               ColorName = col.Name,
+                               DailyPrice = c.DailyPrice,
+                               PageCount = pageCount,
+                               ModelYear = c.ModelYear,
+                               Description = c.Description,
+                               CarId = c.Id,
+                               BrandId = b.Id,
+                               ColorId = col.Id,
+                               ImagePath = (from img in context.CarImages
+                                            where img.CarId == c.Id
+                                            select img.ImagePath).FirstOrDefault()
+                           };
+                return result.ToList();
+            }            
         }
     }
 }
